@@ -5,7 +5,7 @@ It is organized in 7 folders:
 ### data
 Contains the initial STAY comments in the json format, and the pandas dataframes used in the rest of the internship.
 
-### dtatistical_analysis
+### statistical_analysis
 Contains all files linked to the statistical analysis of the STAY corpus to find relevant controversy markers in the data.
 
 ### finetuning_pipeline
