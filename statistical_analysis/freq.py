@@ -12,8 +12,6 @@ nlp = spacy.load("fr_core_news_sm")
 nltk.download('stopwords')
 
 
-
-
 def save_counter_to_file(counter, title = "Most frequent ngrams", filename="output/freq_words.txt"):
     counter = dict(counter)
     with open(filename, "w", encoding="utf-8") as f:
