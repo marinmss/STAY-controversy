@@ -5,7 +5,7 @@ import numpy as np
 from scipy.stats import entropy as scipy_entropy
 from sklearn.metrics import classification_report
 
-from plotter import plot_confusion_matrix, plot_confidence_stats, plot_entropy_stats
+from finetuning_pipeline.cross_validation.plotter import plot_confusion_matrix, plot_confidence_stats, plot_entropy_stats
 
 def save_training(log_history, output_path:str, filename:str = "training.txt"):
     """"

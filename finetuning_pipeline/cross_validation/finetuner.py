@@ -12,10 +12,10 @@ from sklearn.model_selection import StratifiedKFold
 from sklearn.metrics import classification_report
 from datetime import datetime
 
-from configurations import DatasetConfig, TrainingConfig, CVConfig
-from plotter import get_loss_plot
-from tester import predict, run_test
-from logger import save_training, save_metrics
+from finetuning_pipeline.cross_validation.configurations import DataConfig, TrainingConfig, CVConfig
+from finetuning_pipeline.cross_validation.plotter import get_loss_plot
+from finetuning_pipeline.cross_validation.tester import predict, run_test
+from finetuning_pipeline.cross_validation.logger import save_training, save_metrics
 
 import random
 random.seed(42)
@@ -146,7 +146,7 @@ def finetune_fold(train_df, eval_df, output_dir, training_config:TrainingConfig)
 
 
 
-def finetune_cv(data_config: DatasetConfig,training_config:TrainingConfig, cv_config:CVConfig, output_path:str = OUTPUT_DIR):
+def finetune_cv(data_config: DataConfig,training_config:TrainingConfig, cv_config:CVConfig, output_path:str = OUTPUT_DIR):
     """"
     Runs finetuning pipeline with cross validation.
 
@@ -272,73 +272,3 @@ def finetune_cv(data_config: DatasetConfig,training_config:TrainingConfig, cv_co
         return None, None, None, None
 
     return best_fold, best_model, best_tokenizer, predict_df
-
-
-
-
-def main():
-
-    training_config = TrainingConfig()
-
-
-    baseline_model = CamembertForSequenceClassification.from_pretrained("/home/marina/stageM2/output/clean-baseline/finetuned_model")
-    baseline_tokenizer = CamembertTokenizer.from_pretrained("/home/marina/stageM2/output/clean-baseline/finetuned_model")
-
-    clean_stay_clean_baseline_test_path = os.path.join(OUTPUT_DIR, "clean_stay_clean_baseline_test")
-    os.makedirs(clean_stay_clean_baseline_test_path, exist_ok=True)
-
-    import pandas as pd
-    clean_stay_df = pd.read_csv("/home/marina/stageM2/data/clean_dataset.csv")
-    predict_df = run_test(test_df=clean_stay_df,
-                            model = baseline_model,
-                            tokenizer=baseline_tokenizer,
-                            batch_size=training_config.per_device_eval_batch_size,
-                            output_path=clean_stay_clean_baseline_test_path)
-
-    # clean_louvain_clean_baseline_test_path = os.path.join(OUTPUT_DIR, "clean_louvain_clean_baseline_test")
-    # os.makedirs(clean_louvain_clean_baseline_test_path, exist_ok=True)
-
-    # small_zero_clean_baseline_test_path = os.path.join(OUTPUT_DIR, "small_zeroshot_clean_baseline_test")
-    # os.makedirs(small_zero_clean_baseline_test_path, exist_ok=True)
-
-    # import pandas as pd
-
-    # clean_louvain_df = pd.read_csv("/home/marina/stageM2/data/clean_louvain_aug_df.csv")
-    # predict_df = run_test(test_df=clean_louvain_df,
-    #                      model = baseline_model,
-    #                      tokenizer=baseline_tokenizer,
-    #                      batch_size=training_config.per_device_eval_batch_size,
-    #                      output_path=clean_louvain_clean_baseline_test_path)
-
-    # small_zero_df = pd.read_csv("/home/marina/stageM2/data/zero_shot_pred_df.csv")
-    # zero_df = small_zero_df[small_zero_df['text']]
-    # predict_df = run_test(test_df=zero_df,
-    #                      model = baseline_model,
-    #                      tokenizer=baseline_tokenizer,
-    #                      batch_size=training_config.per_device_eval_batch_size,
-    #                      output_path=small_zero_clean_baseline_test_path)
-
-    # import pandas as pd
-    # from sklearn.metrics import classification_report
-    # predict_df = pd.read_csv('/home/marina/stageM2/output/clean_louvain_clean_baseline_test/predict_df')
-
-    # ccc = predict_df[predict_df['origin']=='CCC']
-    # ccc_report = classification_report(ccc["label"], ccc["pred"], digits=4)
-    # save_metrics([ccc_report], output_path="/home/marina/stageM2/output/clean_louvain_clean_baseline_test", filename="ccc_report.txt")
-
-    # cnc = predict_df[predict_df['origin']=='CNC']
-    # cnc_report = classification_report(cnc["label"], cnc["pred"], digits=4)
-    # save_metrics([cnc_report], output_path="/home/marina/stageM2/output/clean_louvain_clean_baseline_test", filename="cnc_report.txt")
-
-    # ncc = predict_df[predict_df['origin']=='NCC']
-    # ncc_report = classification_report(ncc["label"], ncc["pred"], digits=4)
-    # save_metrics([ncc_report], output_path="/home/marina/stageM2/output/clean_louvain_clean_baseline_test", filename="ncc_report.txt")
-
-    # nnn = predict_df[predict_df['origin']=='NNN']
-    # nnn_report = classification_report(nnn["label"], nnn["pred"], digits=4)
-    # save_metrics([nnn_report], output_path="/home/marina/stageM2/output/clean_louvain_clean_baseline_test", filename="nnn_report.txt")
-    
-
-
-if __name__ == "__main__":
-    main()

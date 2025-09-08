@@ -1,0 +1,8 @@
+{
+    "train_version": "baseline",
+    "test_version": "original-clean-whole",
+    "train_path": "./data/dataframes/clean_train_df.csv",
+    "test_path": "./data/dataframes/clean_dataset.csv",
+    "text_column": "text",
+    "label_column": "label"
+}

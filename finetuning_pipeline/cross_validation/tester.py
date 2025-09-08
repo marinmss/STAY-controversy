@@ -4,8 +4,8 @@ import numpy as np
 from scipy.stats import entropy as scipy_entropy
 from sklearn.metrics import classification_report
 
-from plotter import plot_confusion_matrix, plot_confidence_stats, plot_entropy_stats
-from logger import save_metrics
+from finetuning_pipeline.cross_validation.plotter import plot_confusion_matrix, plot_confidence_stats, plot_entropy_stats
+from finetuning_pipeline.cross_validation.logger import save_metrics
 
 def predict(df, model, tokenizer, batch_size:int):
     """

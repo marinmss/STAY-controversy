@@ -7,11 +7,11 @@ from typing import Optional
 
 # DATA CONFIGURATION ==============================================================================
 @dataclass
-class DatasetConfig:
+class DataConfig:
     train_version: str = "original-dataset"
     test_version: str = "original-dataset"
-    train_path: str = "/home/marina/stageM2/data/dataset.csv"
-    test_path: str = "/home/marina/stageM2/data/dataset.csv"
+    train_path: str = "./data/datasets/dataset.csv"
+    test_path: str = "./data/datasets/dataset.csv"
     train_df = None
     test_df = None
     text_column: str = "text"
