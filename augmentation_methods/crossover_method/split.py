@@ -44,15 +44,15 @@ def louvain_split(df, flat_adv_dict = CLEAN_LOUVAIN_DICT):
         match = pattern.search(text)
         if match:
             adverb = match.group(1)              
-            families = flat_adv_dict[adverb.lower()]
+            categories = flat_adv_dict[adverb.lower()]
             start, end = match.span()
             before = text[:start].strip()
             after  = text[end:].strip()
-            return pd.Series([families, before, adverb, after])
+            return pd.Series([categories, before, adverb, after])
 
         return pd.Series([None, None, None, None])
 
-    split_df[['families', 'before', 'adverb', 'after']] = (split_df['text'].apply(split_by_adverb, flat_adv_dict=flat_adv_dict))
+    split_df[['categories', 'before', 'adverb', 'after']] = (split_df['text'].apply(split_by_adverb, flat_adv_dict=flat_adv_dict))
     split_df = split_df.dropna(subset=["before", "adverb", "after"])
 
     return split_df

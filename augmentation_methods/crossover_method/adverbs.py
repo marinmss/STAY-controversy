@@ -393,5 +393,5 @@ def is_interchangeable_category(category, interchangeable_categories = INTERCHAN
     return category in interchangeable_categories
 
 
-df = df = pd.read_csv("../data/dataframes/clean_dataset.csv")
-CLEAN_LOUVAIN_DICT, category_DICT = get_clean_adv_dicts(df, LOUVAIN_DICT)
+df = pd.read_csv("./data/dataframes/clean_dataset.csv")
+CLEAN_LOUVAIN_DICT, CATEGORY_DICT = get_clean_adv_dicts(df, LOUVAIN_DICT)
