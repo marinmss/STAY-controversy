@@ -1,7 +1,6 @@
-Thematic keyword evaluation/Evaluation de mots-clés thématiques
+FR: Evaluation de mots-clés thématiques
 
-Output/Sortie
-FR:
+Sortie
 Chaque fichier généré contient les éléments suivants
 - le titre de la thématique
 - le label correspondant
@@ -17,3 +16,25 @@ Chaque fichier généré contient les éléments suivants
 - deux scores propres aux mots-clés de cette thématique en tant qu'ensemble, définis comme:
     - la moyenne des similarités cosines entre tous les mots-clés de la thématique et tous les commentaires de la thématique
     - le pourcentage de commentaires de la thématique contenant au moins un mot-clé de la thématique
+
+
+
+------------------------------------------------------------------------------------------------------------------
+EN: Thematic keyword evaluation
+
+Output
+Each generated file contains the following elements:
+- the title of the theme
+- the corresponding label
+- the configuration used to establish the reported scores, including:
+    - embedding model (default: SentenceTransformer-all-MiniLM-L6-v2)
+    - isolation model (default: IsolationForest)
+    - the number of comments labeled within the STAY project and related to the theme
+    - the number of keywords associated with the theme
+- a list of the keywords, followed by the following scores for each keyword:
+    - semantic similarity score with the entire corpus, defined as the average cosine similarity with the embeddings of all comments in the corpus. This score ranges from 0 to 1. A value close to 0 indicates that, on average, the element is distant from the corpus, while a value close to 1 represents an element close to it.
+    - isolation score, defined as an anomaly score of the keyword compared to all the keywords of the theme. The higher the score, the more anomalous the element; positive scores represent isolated elements, while negative scores represent elements typical of the set.
+- the average values of these scores, calculated from all the keywords of the theme
+- two scores specific to the keywords of this theme as a whole, defined as:
+    - the average cosine similarity between all the keywords of the theme and all the comments of the theme
+    - the percentage of comments within the theme containing at least one keyword of the theme
